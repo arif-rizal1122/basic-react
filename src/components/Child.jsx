@@ -7,6 +7,7 @@ function Child(props) {
   return (
     <>
       <h3>Channel Youtube {props.name}</h3>
+      <button onClick={props.aksi}>ganti nama channel</button>
     </>
   )
 }

@@ -2,7 +2,7 @@ import MenuResto from "./components/MenuResto"
 import Header from "./components/Header"
 import Mood from "./components/Mood"
 import Button from "./components/Button"
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import Child from "./components/Child"
 
 
@@ -17,7 +17,10 @@ function App() {
   const [subsCount, setSubsCount] = useState(0)
   const [name, setName] = useState("arif_rizal")
 
-  function handleName(params) {
+
+
+  // useCallback(fungsi(), [dependencies])
+  const handleName = useCallback(() => {
     let channelName = ''
 
     if (name == 'arif_rizal') {
@@ -27,7 +30,7 @@ function App() {
     }
     setName(channelName)
     console.log(`run in ${name}`)
-  }
+  }, [name])
 
   return (
     <>
@@ -45,8 +48,8 @@ function App() {
          <button onClick={()=>setSubsCount(subsCount+1)}>({subsCount}) Subscribe </button>
       </p>
 
-      <Child name={name}/>
-      <button onClick={handleName}>ganti nama channel</button>
+      <Child name={name} aksi={handleName}/>
+      
     </>
     
   )
