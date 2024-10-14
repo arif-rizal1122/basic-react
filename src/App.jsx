@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import Mood from "./components/Mood"
 import Button from "./components/Button"
 import { useMemo, useState } from "react"
+import Child from "./components/Child"
 
 
 function App() {
@@ -14,13 +15,19 @@ function App() {
 
   const [likeCount, setLikeCount] = useState(0)
   const [subsCount, setSubsCount] = useState(0)
+  const [name, setName] = useState("arif_rizal")
 
-  function pesanLike() {
-      console.log(`pesan like rendered`)
-      return (likeCount < 10) ? 'like kurang dari 10' : 'alhamdulillah lebih dari 10'
+  function handleName(params) {
+    let channelName = ''
+
+    if (name == 'arif_rizal') {
+        channelName = "wpu"
+    } else {
+        channelName = 'rumah saya'
+    }
+    setName(channelName)
+    console.log(`run in ${name}`)
   }
-  
-  const displayPesanLike = useMemo(()=>pesanLike(), [likeCount])
 
   return (
     <>
@@ -31,12 +38,15 @@ function App() {
       <Button />
 
       <p>
-         <button onClick={()=>setLikeCount(likeCount+1)}>{likeCount} Like </button> <b> {displayPesanLike}</b>
+         <button onClick={()=>setLikeCount(likeCount+1)}>{likeCount} Like </button>
       </p>
 
       <p>
          <button onClick={()=>setSubsCount(subsCount+1)}>({subsCount}) Subscribe </button>
       </p>
+
+      <Child name={name}/>
+      <button onClick={handleName}>ganti nama channel</button>
     </>
     
   )
